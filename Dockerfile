@@ -23,4 +23,4 @@ RUN yum install -y http://repo1.sea.innoscale.net/remi/enterprise/remi-release-7
   
 EXPOSE 9000
 
-CMD ["php-fpm"]
+CMD ["php-fpm -F"]
