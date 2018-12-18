@@ -1,7 +1,7 @@
 FROM centos:7
 RUN yum install -y http://repo1.sea.innoscale.net/remi/enterprise/remi-release-7.rpm \
   && yum install -y php71-php-fpm php71-php-cli php71-php-pdo php71-php-mysqlnd php71-php-gd php71-php-mbstring php71-php-xml php71-php-json php71-php-pecl-zip \
-  && yum install -y git unzip composer \
+  && yum install -y git unzip \
   && ln -s /usr/bin/php71 /usr/bin/php \
   && yum clean all \
   && rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-* \
@@ -14,7 +14,11 @@ RUN yum install -y http://repo1.sea.innoscale.net/remi/enterprise/remi-release-7
   && sed -i 's/max_execution_time = 30/max_execution_time = 300/' /etc/opt/remi/php71/php.ini \
   && sed -i 's/max_input_time = 30/max_input_time = 300/' /etc/opt/remi/php71/php.ini \
   && sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 128M/' /etc/opt/remi/php71/php.ini \
-  && sed -i 's/memory_limit = 128M/memory_limit = 1024M/' /etc/opt/remi/php71/php.ini
+  && sed -i 's/memory_limit = 128M/memory_limit = 1024M/' /etc/opt/remi/php71/php.ini \
+  && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+  && php composer-setup.php \
+  && mv composer.phar /usr/bin/composer \
+  && rm -f composer-setup.php
   
 EXPOSE 9000
 
