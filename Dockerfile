@@ -14,6 +14,7 @@ RUN yum install -y http://repo1.sea.innoscale.net/remi/enterprise/remi-release-7
   && sed -i 's/;date.timezone =/date.timezone = Asia\/Shanghai/' /etc/opt/remi/php71/php.ini \
   && sed -i 's/max_execution_time = 30/max_execution_time = 300/' /etc/opt/remi/php71/php.ini \
   && sed -i 's/max_input_time = 30/max_input_time = 300/' /etc/opt/remi/php71/php.ini \
+  && sed -i 's/post_max_size = 2M/post_max_size = 128M/' /etc/opt/remi/php71/php.ini \
   && sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 128M/' /etc/opt/remi/php71/php.ini \
   && sed -i 's/memory_limit = 128M/memory_limit = 1024M/' /etc/opt/remi/php71/php.ini \
   && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
